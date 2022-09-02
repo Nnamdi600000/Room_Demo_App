@@ -75,11 +75,13 @@
         app:layout_constraintTop_toBottomOf="@id/linear_layout_item">
 
         <ImageView
+            android:id="@+id/image_view_edit"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/edit_png" />
 
         <ImageView
+            android:id="@+id/image_view_delete"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="25dp"

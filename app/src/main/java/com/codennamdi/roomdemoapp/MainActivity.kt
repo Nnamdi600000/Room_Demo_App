@@ -15,8 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonAddDetails.setOnClickListener {
+        val studentDao = (application as StudentApp).db.studentDao()
 
+        binding.buttonAddDetails.setOnClickListener {
+            addDetails(studentDao)
         }
     }
 
@@ -36,10 +38,10 @@ class MainActivity : AppCompatActivity() {
                 studentDAO.insert(
                     StudentEntity(
                         name = name,
-                        matricNumber = matricNumber.toInt(),
+                        matricNumber = matricNumber.toLong(),
                         email = emailAddress,
                         gender = gender,
-                        phoneNumber = phoneNumber.toInt(),
+                        phoneNumber = phoneNumber.toLong(),
                         age = age.toInt(),
                         schoolName = schoolName
                     )
@@ -60,5 +62,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+    }
+
+    fun setUpListToTheRecyclerView(studentList: ArrayList<StudentEntity>, studentDAO: StudentDAO) {
+
     }
 }

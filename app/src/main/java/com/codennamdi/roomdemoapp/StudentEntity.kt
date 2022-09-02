@@ -11,13 +11,13 @@ data class StudentEntity(
     @ColumnInfo(name = "nameId")
     val name: String = "",
     @ColumnInfo(name = "matricNumberId")
-    val matricNumber: Int,
+    val matricNumber: Long,
     @ColumnInfo(name = "email-id")
     val email: String = "",
     @ColumnInfo(name = "genderId")
     val gender: String = "",
     @ColumnInfo(name = "phoneNumberId")
-    val phoneNumber: Int,
+    val phoneNumber: Long,
     @ColumnInfo(name = "ageId")
     val age: Int,
     @ColumnInfo(name = "schoolNameId")
