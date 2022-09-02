@@ -1,11 +1,64 @@
 package com.codennamdi.roomdemoapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.codennamdi.roomdemoapp.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.buttonAddDetails.setOnClickListener {
+
+        }
+    }
+
+    fun addDetails(studentDAO: StudentDAO) {
+        val name = binding.textFieldName.text.toString()
+        val matricNumber = binding.textFieldMatricNumb.text.toString()
+        val emailAddress = binding.textFieldEmail.text.toString()
+        val gender = binding.textFieldGender.text.toString()
+        val phoneNumber = binding.textFieldPhoneNumb.text.toString()
+        val age = binding.textFieldAge.text.toString()
+        val schoolName = binding.textFieldSchoolName.text.toString()
+
+        if (name.isNotEmpty() && matricNumber.isNotEmpty() && emailAddress.isNotEmpty() &&
+            gender.isNotEmpty() && phoneNumber.isNotEmpty() && age.isNotEmpty() && schoolName.isNotEmpty()
+        ) {
+            lifecycleScope.launch {
+                studentDAO.insert(
+                    StudentEntity(
+                        name = name,
+                        matricNumber = matricNumber.toInt(),
+                        email = emailAddress,
+                        gender = gender,
+                        phoneNumber = phoneNumber.toInt(),
+                        age = age.toInt(),
+                        schoolName = schoolName
+                    )
+                )
+                Toast.makeText(applicationContext, "Details saved!", Toast.LENGTH_LONG).show()
+                binding.textFieldName.text?.clear()
+                binding.textFieldMatricNumb.text?.clear()
+                binding.textFieldEmail.text?.clear()
+                binding.textFieldGender.text?.clear()
+                binding.textFieldPhoneNumb.text?.clear()
+                binding.textFieldAge.text?.clear()
+                binding.textFieldSchoolName.text?.clear()
+            }
+        } else {
+            Toast.makeText(
+                this@MainActivity,
+                "name, matric number, email, gender, phone number, age, school name cannot be empty",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }
