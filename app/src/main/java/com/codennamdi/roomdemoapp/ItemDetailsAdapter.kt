@@ -8,8 +8,8 @@ import com.codennamdi.roomdemoapp.databinding.ItemDetailBinding
 
 class ItemDetailsAdapter(
     private val items: ArrayList<StudentEntity>,
-    private val deleteListener: (id: Int) -> Unit,
-    private val updateListener: (id: Int) -> Unit
+    //private val deleteListener: (id: Int) -> Unit,
+    //private val updateListener: (id: Int) -> Unit
 ) : RecyclerView.Adapter<ItemDetailsAdapter.ViewHolder>() {
 
     class ViewHolder(binding: ItemDetailBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -62,15 +62,15 @@ class ItemDetailsAdapter(
         }
 
         holder.editImageView.setOnClickListener {
-            updateListener.invoke(item.id)
+            //updateListener.invoke(item.id)
         }
 
         holder.deleteImageView.setOnClickListener {
-            deleteListener.invoke(item.id)
+            //deleteListener.invoke(item.id)
         }
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return items.size
     }
 }
