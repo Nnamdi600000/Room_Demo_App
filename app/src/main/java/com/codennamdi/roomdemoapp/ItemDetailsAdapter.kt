@@ -8,8 +8,9 @@ import com.codennamdi.roomdemoapp.databinding.ItemDetailBinding
 
 class ItemDetailsAdapter(
     private val items: ArrayList<StudentEntity>,
-    //private val deleteListener: (id: Int) -> Unit,
-    //private val updateListener: (id: Int) -> Unit
+    private val updateListener: (id: Int) -> Unit,
+    private val deleteListener: (id: Int, name: String, matricNum: Long, email: String, gender: String, phoneNumber: Long, age: Int, schoolNam: String) -> Unit
+
 ) : RecyclerView.Adapter<ItemDetailsAdapter.ViewHolder>() {
 
     class ViewHolder(binding: ItemDetailBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -19,6 +20,7 @@ class ItemDetailsAdapter(
         val emailTv = binding.textViewEmail
         val genderTv = binding.textViewGender
         val ageTv = binding.textViewAge
+        val phoneNumber = binding.textViewPhoneNumber
         val schoolNameTv = binding.textViewSchName
         val deleteImageView = binding.imageViewDelete
         val editImageView = binding.imageViewEdit
@@ -42,6 +44,7 @@ class ItemDetailsAdapter(
         holder.matricNumber.text = item.matricNumber.toString()
         holder.emailTv.text = item.email
         holder.genderTv.text = item.gender
+        holder.phoneNumber.text = item.phoneNumber.toString()
         holder.ageTv.text = item.age.toString()
         holder.schoolNameTv.text = item.schoolName
 
@@ -62,11 +65,20 @@ class ItemDetailsAdapter(
         }
 
         holder.editImageView.setOnClickListener {
-            //updateListener.invoke(item.id)
+            updateListener.invoke(item.id)
         }
 
         holder.deleteImageView.setOnClickListener {
-            //deleteListener.invoke(item.id)
+            deleteListener.invoke(
+                item.id,
+                item.name,
+                item.matricNumber,
+                item.email,
+                item.gender,
+                item.phoneNumber,
+                item.age,
+                item.schoolName
+            )
         }
     }
 
