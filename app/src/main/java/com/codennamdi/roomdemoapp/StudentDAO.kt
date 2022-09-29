@@ -19,5 +19,4 @@ interface StudentDAO {
 
     @Query("SELECT * FROM  `student-table` where id=:id")
     fun fetchStudentById(id: Int): Flow<StudentEntity>
-
 }
